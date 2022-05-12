@@ -1,0 +1,115 @@
+.cartDropdownContainer {
+  position: absolute;
+  top: 81px;
+  right: 56px;
+  width: 325px;
+  height: 677px;
+  padding: 32px 16px;
+  background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  z-index: 5;
+  overflow: scroll;
+  cursor: auto;
+}
+
+.cartDropdownContainer .cartContent {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.cartDropdownContainer .cartContent .cartDetails .cartTitle {
+  width: 118px;
+  height: 26px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 160%;
+  padding-bottom: 2rem;
+  color: #1D1F22;
+}
+
+.cartDropdownContainer .cartContent .cartDetails .cartTitle > span {
+  font-weight: 400;
+}
+
+.cartDropdownContainer .cartButtons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.cartDropdownContainer .cartButtons .view {
+  width: 140px;
+  height: 43px;
+  background-color: #fff;
+  border: 1px solid #1D1F22;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  /* identical to box height, or 17px */
+  text-transform: uppercase;
+  color: #1D1F22;
+}
+
+.cartDropdownContainer .cartButtons .check {
+  width: 140px;
+  height: 43px;
+  background-color: #5ECE7B;
+  border: none;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #FFFFFF;
+}
+
+.cartTotal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}

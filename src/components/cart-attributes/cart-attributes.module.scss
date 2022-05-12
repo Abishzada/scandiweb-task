@@ -1,0 +1,40 @@
+.capacityContainer {
+
+    .title {}
+
+    .capacity {
+        display: flex;
+
+        .items {
+            min-width: 24px;
+            height: 24px;
+            margin-right: 4px;
+            padding: 3px;
+            border: 1px solid #1D1F22;
+
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 160%;
+            text-align: center;
+        }
+    }
+
+}
+
+.colorContainer {
+
+    .colors {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+
+        >span {
+            width: 16px;
+            height: 16px;
+
+        }
+    }
+
+}

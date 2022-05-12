@@ -1,0 +1,70 @@
+.cardContent {
+    height: 444px;
+    width: 386px;
+    padding: 1rem;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .productImage {
+        width: 354px;
+        height: 330px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    &:hover {
+        box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+    }
+
+
+    img {
+        width: 100%;
+        height: 338px;
+        overflow: hidden;
+        // background: #FFFFFF;
+        // opacity: 0.5;
+    }
+
+    .titles {
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
+        padding-top: 2rem;
+
+        .name {
+            font-style: normal;
+            font-weight: 300;
+            font-size: 18px;
+            line-height: 160%;
+        }
+
+        >span {
+            font-size: 18px;
+            font-weight: 300;
+            line-height: 29px;
+            letter-spacing: 0px;
+            text-align: left;
+            color: #1D1F22;
+
+        }
+
+    }
+}
+
+.cardRouter {
+    text-decoration: none;
+}
+
+.inStock {
+    position: absolute;
+    // font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 160%;
+    display: flex;
+    align-items: center;
+    color: #8D8F9A;
+}

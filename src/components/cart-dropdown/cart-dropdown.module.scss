@@ -1,0 +1,95 @@
+.cartDropdownContainer {
+    position: absolute;
+    top: 81px;
+    right: 56px;
+
+    width: 325px;
+    height: 577px;
+    padding: 32px 16px;
+    background-color: white;
+    
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    
+    z-index: 5;
+    overflow: scroll;
+    cursor: auto;
+
+
+    .cartContent {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .cartDetails {
+
+            .cartTitle {
+                width: 118px;
+                height: 26px;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 160%;
+                padding-bottom: 2rem;
+
+                color: #1D1F22;
+
+                >span {
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+
+    .cartButtons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .view {
+            width: 140px;
+            height: 43px;
+            background-color: #fff;
+            border: 1px solid #1D1F22;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 120%;
+            /* identical to box height, or 17px */
+
+            text-transform: uppercase;
+
+            color: #1D1F22;
+
+        }
+
+        .check {
+            width: 140px;
+            height: 43px;
+            background-color: #5ECE7B;
+            border: none;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 120%;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF;
+
+        }
+    }
+}
+
+.cartTotal {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-weight: 500;
+    margin-bottom: 2rem;
+
+}

@@ -1,0 +1,48 @@
+.capacityContainer {
+    margin-bottom: 2rem;
+
+    .title {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 18px;
+
+        display: flex;
+        align-items: center;
+        text-align: center;
+
+        color: #1D1F22;
+    }
+
+    .capacity {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+
+        .items {
+            width: 63px;
+            height: 45px;
+            border: 1px solid #1D1F22;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+.colorContainer {
+
+    .colors {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+
+        .color {
+            width: 36px;
+            height: 36px;
+
+        }
+    }
+}

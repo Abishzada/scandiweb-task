@@ -1,0 +1,152 @@
+@import "../../assets//color.scss";
+
+.navbar {
+    height: 80px;
+    display: grid;
+    grid-template-columns: 2fr 10fr 1.4fr;
+    align-items: center;
+
+    .categories {
+        height: 100%;
+        margin: 0 3rem;
+        display: flex;
+
+        >a {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 0 1rem;
+            line-height: 2;
+
+            text-decoration: none;
+            color: $black;
+
+            &:hover {
+                border-bottom: 1px solid $green;
+
+                >a {
+                    color: $green;
+                }
+
+                color: $green;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .logoArea {
+            background: linear-gradient(316.98deg, $green 16.88%, $green 84.04%);
+            width: 31px;
+            height: 31px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .logo {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+
+    .cart {
+        width: 6rem;
+        display: flex;
+        justify-content: space-evenly;
+        
+        .currency {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            .up {
+                border: solid black;
+                border-width: 2px 0 0 2px;
+                display: inline-block;
+                padding: 2px;
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+
+            }
+
+            .down {
+                border: solid black;
+                border-width: 0 2px 2px 0;
+                display: inline-block;
+                padding: 2px;
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+
+            }
+
+            .currencyContainer {
+                position: absolute;
+                top: 82px;
+                right: 58px;
+                z-index: 6;
+                width: 100px;
+                // height: 140px;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                background-color: white;
+                filter: drop-shadow(0px 4px 35px rgba(168, 172, 176, 0.19));
+            }
+
+            .symbol {
+                padding: 0 0.4rem;
+            }
+
+        }
+
+        .cartIcon {
+            width: 1.3rem;
+            position: relative;
+
+            .cartIndex {
+                position: absolute;
+                /* display: none; */
+                bottom: 54%;
+                left: 80%;
+                border: 1px solid black;
+                border-radius: 50%;
+                font-size: 15px;
+                line-height: 1;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 16px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                background: #1D1F22;
+                border-radius: 60px;
+                color: #fff;
+                width: 20px;
+                height: 20px;
+                justify-content: center;
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+    }
+}
+
+.isActive {
+    border-bottom: 1px solid #5ECE7B;
+    cursor: pointer;
+    color: #5ECE7B !important;
+}

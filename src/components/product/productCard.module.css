@@ -1,0 +1,84 @@
+.cardContent {
+  height: 444px;
+  width: 386px;
+  padding: 1rem;
+  background: #FFFFFF;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.cardContent .productImage {
+  width: 354px;
+  height: 330px;
+  background-size: cover;
+  background-position: center;
+}
+
+.cardContent:hover {
+  -webkit-box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+          box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+
+.cardContent img {
+  width: 100%;
+  height: 338px;
+  overflow: hidden;
+}
+
+.cardContent .titles {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  padding-top: 2rem;
+}
+
+.cardContent .titles .name {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 160%;
+}
+
+.cardContent .titles > span {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 29px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #1D1F22;
+}
+
+.cardRouter {
+  text-decoration: none;
+}
+
+.inStock {
+  position: absolute;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 160%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #8D8F9A;
+}
