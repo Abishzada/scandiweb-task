@@ -13,14 +13,26 @@ export default class Product extends Component {
     this.state = {};
   }
 
-  componentDidMount() {}
+  async componentDidMount() {
+    const { activeCategory, setActiveCategory } = this.context;
+    const currentUrl = window.location.href;
+    const url = currentUrl.split("/");
+    const { fetchProductData } = this.context;
+    await fetchProductData(url[url.length - 1]);
+  }
 
   render() {
     const { product, addProductToCart, isCartOpen } = this.context;
     return (
       <div>
         <Navbar></Navbar>
-        <div className={isCartOpen ? `${styles.productPage} ${styles.blur}` : styles.productPage}>
+        <div
+          className={
+            isCartOpen
+              ? `${styles.productPage} ${styles.blur}`
+              : styles.productPage
+          }
+        >
           <div className={styles.imageContainer}>
             <div
               className={styles.sideImages}
