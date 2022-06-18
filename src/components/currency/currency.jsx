@@ -4,7 +4,6 @@ import { ApiContext } from "../../context/api.context";
 
 export default class Currency extends Component {
   static contextType = ApiContext;
-
   render() {
     const { currency } = this.props;
     const { setCurrentCurrency } = this.context;

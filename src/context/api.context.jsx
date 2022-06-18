@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component, createContext } from "react";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
@@ -87,7 +88,10 @@ export default class ApiContextData extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeCategory: "all",
+      activeAttributes: null,
+      activeCategory: "",
+      activeAttribute: null,
+      activeColor: null,
       category: [],
       categoryName: "",
       categoryOnUrl: "",
@@ -95,9 +99,11 @@ export default class ApiContextData extends Component {
       cartQuantity: 0,
       currencies: [],
       currentCurrency: "$",
+      inStock: true,
       isActive: false,
       isCartOpen: false,
       isCurrencyOpen: false,
+      isIconOnclick: false,
       product: [],
       productId: "",
       addProductToCart: (productToCart) => this.addProductToCart(productToCart),
@@ -113,7 +119,10 @@ export default class ApiContextData extends Component {
       },
       fetchProductData: async (productId) => {
         await client
-          .query({ query: GET_PRODUCT, variables: { id: productId } })
+          .query({
+            query: GET_PRODUCT,
+            variables: { id: productId && productId },
+          })
           .then((response) => {
             const result = response.data;
             this.setState(result);
@@ -124,18 +133,13 @@ export default class ApiContextData extends Component {
       setActiveCategory: (title) => {
         this.setState({ activeCategory: title });
       },
-      setCurrency: () => {
-        this.setState({ isCurrencyOpen: !this.state.isCurrencyOpen });
+      setActiveAttribute: (item) => {
+        this.setState({ activeAttribute: item });
       },
-      setCurrentCurrency: (symbol) => {
-        this.setState({ currentCurrency: symbol });
+      setActiveColor: (item) => {
+        this.setState({ activeColor: item });
       },
-      setProductId: (id) => {
-        this.setState({ productId: id });
-      },
-      setIsCartOpen: () => {
-        this.setState({ isCartOpen: !this.state.isCartOpen });
-      },
+
       setCartItemQuantity: () => {
         const { cartItems } = this.state;
         let a = 0;
@@ -147,6 +151,25 @@ export default class ApiContextData extends Component {
       setCartItems: (item) => {
         this.setState({ cartItems: item });
         this.getCartItemQuantity();
+      },
+      setCurrency: (bool) => {
+        this.setState({ isCurrencyOpen: bool });
+      },
+      setCurrentCurrency: (symbol) => {
+        this.setState({ currentCurrency: symbol });
+        setTimeout(() => {}, 1000);
+      },
+      setIsIconOnclick: (setIsIconOnclick) => {
+        this.setIsIconOnclick(setIsIconOnclick);
+      },
+      setIsCartOpen: (bool) => {
+        this.setState({ isCartOpen: bool });
+      },
+      setInSctok: (productInStock) => {
+        this.setState({ inStock: productInStock });
+      },
+      setProductId: (id) => {
+        this.setState({ productId: id });
       },
     };
   }
@@ -160,12 +183,24 @@ export default class ApiContextData extends Component {
     const currentUrl = window.location.href;
     const url = currentUrl.split("/");
     this.setState({ activeCategory: url[url.length - 1] });
-    const result = await client
+    await client
       .query({
         query: GET_CATEGORY,
-        variables: { title: this.state.activeCategory },
+        variables: { title: url[url.length - 1] },
       })
-      .then((response) => this.setState(response.data))
+      .then((response) => {
+        this.setState(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  fetchProductDataById = async (productId) => {
+    await client
+      .query({ query: GET_PRODUCT, variables: { id: productId && productId } })
+      .then((response) => {
+        const result = response.data;
+        this.setState(result);
+      })
       .catch((error) => console.log(error));
   };
 
@@ -177,33 +212,67 @@ export default class ApiContextData extends Component {
         this.setState(result);
       })
       .catch((error) => console.log(error));
-  };
 
-  fetchProductDataById = async (title) => {
-    await this.state.fetchProductData(title);
+    this.setState();
   };
 
   addProductToCart = (productToCart) => {
-    const { cartItems, product, setCartItems } = this.state;
+    const {
+      cartItems,
+      setCartItems,
+      activeAttribute,
+      activeColor,
+      isIconOnclick,
+    } = this.state;
 
-    const existingCartItem = cartItems.find(
-      (cartItem) => cartItem.id === productToCart.id
-    );
-
-    if (existingCartItem) {
-      return cartItems.map((cartItem) =>
-        cartItem.id === productToCart.id
-          ? {
-              ...cartItem,
-              quantity: productToCart.quantity + 1,
-            }
-          : cartItem
+    if ((activeAttribute || activeColor) && !isIconOnclick) {
+      const existingCartItem = cartItems.find(
+        (cartItem) => cartItem === productToCart
       );
+
+      if (existingCartItem) {
+        return cartItems.map((cartItem) =>
+          cartItem.id === productToCart.id
+            ? {
+                ...cartItem,
+                quantity: productToCart.quantity + 1,
+                activeAttribute: activeAttribute,
+                activeColor: activeColor,
+              }
+            : cartItem
+        );
+      } else {
+        cartItems.push({
+          ...productToCart,
+          quantity: 1,
+          activeAttribute: activeAttribute,
+          activeColor: activeColor,
+        });
+      }
+
+      setCartItems(cartItems);
+      this.getCartItemQuantity();
+    } else if (isIconOnclick) {
+      if (activeAttribute || activeColor) {
+        cartItems.push({
+          ...productToCart,
+          quantity: 1,
+          activeAttribute: activeAttribute,
+          activeColor: activeColor,
+        });
+      } else {
+        cartItems.push({
+          ...productToCart,
+          quantity: 1,
+          activeAttribute: activeAttribute,
+          activeColor: activeColor,
+        });
+      }
+      setCartItems(cartItems);
+      this.getCartItemQuantity();
     } else {
-      cartItems.push({ ...productToCart, quantity: 1 });
+      alert("Size or Color should be chosen");
     }
-    setCartItems(cartItems);
-    this.getCartItemQuantity();
   };
 
   getCartItemQuantity = (items) => {
@@ -224,16 +293,13 @@ export default class ApiContextData extends Component {
     } else if (item.quantity == 0) {
       this.deleteItemCart(item);
     }
-    const { cartItems, setCartItems } = this.state;
     this.setState({ ...this.state.cartItems });
     this.getCartItemQuantity();
   };
 
   deleteItemCart = (item) => {
     const { cartItems, setCartItems } = this.state;
-    const filteredCartItems = cartItems.filter(
-      (cartItem) => cartItem.id !== item.id
-    );
+    const filteredCartItems = cartItems.filter((cartItem) => cartItem !== item);
 
     setCartItems(filteredCartItems);
     this.getCartItemQuantity(filteredCartItems);
@@ -243,6 +309,22 @@ export default class ApiContextData extends Component {
     item.quantity++;
     this.setState({ ...this.state.cartItems });
     this.getCartItemQuantity();
+  };
+
+  setActiveCategory = (categoryTitle) => {
+    this.setState({ activeCategory: categoryTitle });
+  };
+
+  setActiveAttribute = (item) => {
+    this.setState({ activeAttribute: item });
+  };
+
+  setActiveColor = (item) => {
+    this.setState({ activeColor: item });
+  };
+
+  setIsIconOnclick = (isIconOnclick) => {
+    this.setState({ isIconOnclick: isIconOnclick });
   };
 
   render() {

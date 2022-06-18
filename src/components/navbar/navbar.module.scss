@@ -58,7 +58,7 @@
         width: 6rem;
         display: flex;
         justify-content: space-evenly;
-        
+
         .currency {
             display: flex;
             align-items: center;
@@ -113,9 +113,15 @@
             width: 1.3rem;
             position: relative;
 
+            .icon {
+                position: absolute;
+                top: 0;
+                left: 0;
+
+            }
+
             .cartIndex {
                 position: absolute;
-                /* display: none; */
                 bottom: 54%;
                 left: 80%;
                 border: 1px solid black;

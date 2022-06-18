@@ -10,8 +10,14 @@ export default class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isCartPage: true,
+      cartItems: [],
+      isCartPage: false,
     };
+  }
+
+  componentDidMount() {
+    const { cartItems } = this.context;
+    this.setState({ cartItems: cartItems });
   }
 
   getTotalQuantity = () => {
@@ -34,12 +40,13 @@ export default class Cart extends Component {
       symbol = a[0].currency.symbol;
       priceSum += a[0].amount * item.quantity;
     });
-    const result = symbol + Math.round(priceSum);
+    const result = symbol + Math.round((priceSum + Number.EPSILON) * 100) / 100;
     return <>{result}</>;
   };
 
   render() {
-    const { cartItems, isCartOpen } = this.context;
+    const { cartItems } = this.state;
+    const { isCartOpen } = this.context;
     return (
       <>
         <Navbar />

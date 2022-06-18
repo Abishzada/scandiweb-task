@@ -72,15 +72,18 @@
   cursor: pointer;
 }
 
-.content .visual .image {
+.content .visual .imageContainer {
+  position: relative;
+}
+
+.content .visual .imageContainer .image {
   width: 200px;
   height: 288px;
   background-size: cover;
   background-position: center;
-  position: relative;
 }
 
-.content .visual .image .arrows {
+.content .visual .imageContainer .arrows {
   position: absolute;
   left: 72%;
   top: 88%;
@@ -92,7 +95,7 @@
   gap: 8px;
 }
 
-.content .visual .image .arrows > span {
+.content .visual .imageContainer .arrows > span {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

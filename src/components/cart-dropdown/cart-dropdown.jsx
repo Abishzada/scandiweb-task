@@ -6,8 +6,22 @@ import { Link } from "react-router-dom";
 
 export default class CartDropdown extends Component {
   static contextType = ApiContext;
+  constructor(props) {
+    super(props);
+    this.state = {
+      cartItems: [],
+    };
+  }
 
-  componentDidMount() {}
+  componentDidMount() {
+    const { cartItems } = this.context;
+    this.setState({ cartItems: cartItems });
+  }
+
+  getRandomId = () => {
+    const randomId = Math.round(Math.random() * (999 - 100) + 100);
+    return randomId;
+  };
 
   getTotalQuantity = () => {
     const { cartItems } = this.context;
@@ -29,22 +43,33 @@ export default class CartDropdown extends Component {
       symbol = activePrices[0].currency.symbol;
       priceSum += activePrices[0].amount * item.quantity;
     });
-    const result = symbol + Math.round(priceSum);
+    const result = symbol + Math.round((priceSum + Number.EPSILON) * 100) / 100;
     return <>{result}</>;
   };
+
+  toggleCart = () => {
+    const { setIsCartOpen } = this.context;
+    setIsCartOpen();
+  };
+
   render() {
-    const { cartItems } = this.context;
+    const { cartItems } = this.state;
 
     return (
       <div className={styles.cartDropdownContainer}>
         <div className={styles.cartContent}>
           <div className={styles.cartDetails}>
-            <div className={styles.cartTitle}>
+            <div onClick={this.getRandomId} className={styles.cartTitle}>
               My bag, <span> {this.getTotalQuantity()} items</span>
             </div>
             {cartItems
               ? cartItems.map((item) => {
-                  return <CartDropdownItem key={item.id} item={item} />;
+                  return (
+                    <CartDropdownItem
+                      key={item.id + this.getRandomId()}
+                      item={item}
+                    />
+                  );
                 })
               : null}
           </div>
@@ -54,10 +79,10 @@ export default class CartDropdown extends Component {
           </div>
         </div>
         <div className={styles.cartButtons}>
-          <button className={styles.view}>VIEW BAG</button>
-          <Link to="/cart" className={styles.check}>
-            CHECK OUT
+          <Link to="/cart" className={styles.view} onClick={this.toggleCart}>
+            VIEW BAG
           </Link>
+          <div className={styles.check}>CHECK OUT</div>
         </div>
       </div>
     );

@@ -19,9 +19,22 @@
         .details {
             display: flex;
             flex-direction: column;
-            justify-content: space-between  ;
+            justify-content: space-between;
 
             .title {
+
+                .brand {
+                    font-style: normal;
+                    font-weight: 300;
+                    font-size: 16px;
+                    line-height: 160%;
+
+                    display: flex;
+                    align-items: center;
+
+                    color: #1D1F22;
+
+                }
 
                 .name {
                     width: 7rem;
@@ -30,7 +43,6 @@
                     font-weight: 300;
                     font-size: 16px;
                     line-height: 160%;
-                    /* or 26px */
                     word-wrap: break-word;
                     color: #1D1F22;
                     margin-bottom: 1rem;

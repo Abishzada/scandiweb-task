@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from "react";
 import { ApiContext } from "../../context/api.context";
 import styles from "./cartProductCard.module.scss";
@@ -11,7 +12,6 @@ export default class Cartproductcard extends Component {
     super(props);
     this.state = {
       current: 0,
-      setCurrent: () => {},
     };
   }
 
@@ -38,8 +38,7 @@ export default class Cartproductcard extends Component {
   };
 
   render() {
-    const { cartItem } = this.props;
-    const { isCartPage } = this.props;
+    const { cartItem, isCartPage } = this.props;
     const { incrementItemQuantity, decrementItemQuantity } = this.context;
     const { current } = this.state;
 
@@ -52,7 +51,7 @@ export default class Cartproductcard extends Component {
               <Price isCartPage={isCartPage} prices={cartItem.prices} />
             </div>
           </div>
-          <Attributes attributes={cartItem.attributes} />
+          <Attributes attributes={cartItem} />
         </div>
         <div className={styles.visual}>
           <div className={styles.counter}>
@@ -71,20 +70,22 @@ export default class Cartproductcard extends Component {
             </div>
           </div>
 
-          <div
-            className={styles.image}
-            style={{
-              backgroundImage: `url(${cartItem.gallery[current]})`,
-            }}
-          >
-            <div className={styles.arrows}>
-              <span
-                onClick={() => this.prevImage(cartItem.gallery.length)}
-              >{`<`}</span>
-              <span
-                onClick={() => this.nextImage(cartItem.gallery.length)}
-              >{`>`}</span>
-            </div>
+          <div className={styles.imageContainer}>
+            <img
+              className={styles.image}
+              src={cartItem.gallery[current]}
+              alt="name"
+            />
+            {cartItem && cartItem.gallery && cartItem.gallery.length > 1 ? (
+              <div className={styles.arrows}>
+                <span
+                  onClick={() => this.prevImage(cartItem.gallery.length)}
+                >{`<`}</span>
+                <span
+                  onClick={() => this.nextImage(cartItem.gallery.length)}
+                >{`>`}</span>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

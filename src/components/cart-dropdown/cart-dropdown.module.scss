@@ -7,11 +7,11 @@
     height: 577px;
     padding: 32px 16px;
     background-color: white;
-    
+
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    
+
     z-index: 5;
     overflow: scroll;
     cursor: auto;
@@ -57,8 +57,11 @@
             font-weight: 600;
             font-size: 14px;
             line-height: 120%;
-            /* identical to box height, or 17px */
-
+            text-transform: uppercase;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-transform: uppercase;
 
             color: #1D1F22;

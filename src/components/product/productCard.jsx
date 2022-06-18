@@ -1,45 +1,119 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from "react";
 import Price from "../prices/prices";
 import styles from "./productCard.module.scss";
 import { ApiContext } from "../../context/api.context";
 import { Link } from "react-router-dom";
+import CartProductIcon from "../../assets/cartProductIcon";
+import ClickMuncher from "../helper/clickMuncher";
 
 export default class ProductCard extends Component {
   static contextType = ApiContext;
   constructor(props) {
     super(props);
     this.state = {
+      product: this.props.product || [],
       productId: "",
+      style: {
+        display: "none",
+      },
     };
   }
 
   componentDidMount = () => {};
 
-  render() {
-    const { fetchProductData, setActiveCategory } = this.context;
-    const { product } = this.props;
+  handleActiveAttributes = (product) => {
+    const {
+      setActiveAttribute,
+      setActiveColor,
+      setIsIconOnclick,
+    } = this.context;
+    setIsIconOnclick(true);
 
-    const fetchAndSet = (title) => {
-      fetchProductData(title.id);
-      setActiveCategory(title.category);
-    };
+    setTimeout(() => {
+      product.attributes.map((attr) => {
+        switch (attr.name) {
+          case "Size":
+            setActiveAttribute(attr.items[0]);
+            break;
+          case "Capacity":
+            setActiveAttribute(attr.items[0]);
+            break;
+          case "Color":
+            setActiveColor(attr.items[0]);
+            break;
+        }
+      });
+    }, 100);
+  };
+
+  handleAddCart = (product) => {
+    const { addProductToCart } = this.context;
+
+    setTimeout(() => {
+      addProductToCart(product);
+    }, 100);
+  };
+
+  setAndAdd = (product) => {
+    this.handleActiveAttributes(product);
+    setTimeout(() => {
+      this.handleAddCart(product);
+    }, 100);
+  };
+
+  fetchAndSet = async (title) => {
+    const { fetchProductData, setActiveCategory, setProductId } =
+      this.context;
+    await fetchProductData(title.id);
+    setProductId(title.id);
+    setActiveCategory(title.category);
+  };
+
+  render() {
+    const { product, style } = this.state;
 
     return product && product.inStock ? (
       <Link
-        onClick={() => fetchAndSet(product)}
+        onClick={() => this.fetchAndSet(product)}
         to={`/product/${product.id}`}
         className={styles.cardRouter}
       >
-        <div className={styles.cardContent}>
-          <div
+        <div
+          className={styles.cardContent}
+          onMouseEnter={() => {
+            this.setState({
+              style: {
+                display: "block",
+              },
+            });
+          }}
+          onMouseLeave={() => {
+            this.setState({
+              style: {
+                display: "none",
+              },
+            });
+          }}
+        >
+          <img
             className={styles.productImage}
-            style={{
-              backgroundImage: `url(${product.gallery[0]}) `,
-            }}
-          ></div>
-
+            src={product.gallery[0]}
+            alt={product.name}
+          />
+          <div
+            onClick={() => this.setAndAdd(product)}
+            style={style}
+            className={styles.cartIconContainer}
+          >
+            <ClickMuncher>
+              <CartProductIcon />
+            </ClickMuncher>
+          </div>
           <div className={styles.titles}>
-            <span className={styles.name}>{product ? product.name : null}</span>
+            <span className={styles.name}>
+              {product ? product.brand + " " + product.name : null}
+            </span>
             {product && product.prices
               ? product.prices.map((price) => {
                   return (
@@ -54,7 +128,7 @@ export default class ProductCard extends Component {
       </Link>
     ) : (
       <Link
-        onClick={() => fetchProductData(product.id)}
+        onClick={() => this.fetchAndSet(product)}
         to={`/product/${product.id}`}
         className={styles.cardRouter}
         style={{
@@ -62,17 +136,20 @@ export default class ProductCard extends Component {
         }}
       >
         <div className={styles.cardContent}>
-          <div
+          <img
             className={styles.productImage}
+            src={product.gallery[0]}
+            alt={product.name}
             style={{
-              backgroundImage: `url(${product.gallery[0]})`,
               opacity: 0.5,
             }}
-          ></div>
+          />
           <div className={styles.inStock}>OUT OF STOCK</div>
 
           <div className={styles.titles}>
-            <span className={styles.name}>{product ? product.name : null}</span>
+            <span className={styles.name}>
+              {product ? product.brand + " " + product.name : null}
+            </span>
             {product && product.prices
               ? product.prices.map((price) => {
                   return (

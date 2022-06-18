@@ -18,12 +18,13 @@ export default class CartDropdownItem extends Component {
         <div className={styles.itemDetails}>
           <div className={styles.details}>
             <div className={styles.title}>
+              <div className={styles.brand}>{item.brand}</div>
               <div className={styles.name}>{item.name}</div>
               <div>
                 <CartPrices prices={item.prices} />
               </div>
             </div>
-            <CartAttributes attributes={item.attributes} />
+            <CartAttributes attributes={item} />
           </div>
           <div className={styles.itemCounter}>
             <div
@@ -41,12 +42,11 @@ export default class CartDropdownItem extends Component {
             </div>
           </div>
           {item && item.gallery ? (
-            <div
+            <img
               className={styles.itemImage}
-              style={{
-                backgroundImage: `url(${item.gallery[0]}) `,
-              }}
-            ></div>
+              src={item.gallery[0]}
+              alt={item.value}
+            />
           ) : null}
         </div>
       </div>

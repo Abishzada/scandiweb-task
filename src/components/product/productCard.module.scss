@@ -7,6 +7,31 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+
+
+    .cartIconContainer {
+        position: absolute;
+        bottom: 76px;
+        right: 35px;
+        // z-index: 99;
+        // pointer-events: none;
+
+        // &::after {
+        //     content: "";
+        //     position: absolute;
+        //     width: 100px;
+        //     height: 100px;
+        //     background-color: gray;
+        //     opacity: 0.3;
+        //     left: 0;
+        //     top: 0;
+        //     z-index: 99;
+        //     pointer-events: none;
+        // }
+    }
+
+
 
     .productImage {
         width: 354px;

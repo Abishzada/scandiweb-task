@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { ApiContext } from "../../context/api.context";
 import CartDropdown from "../cart-dropdown/cart-dropdown";
 import Currency from "../currency/currency";
+import onClickOutside from "react-onclickoutside";
 
 const NavLinks = [
   {
@@ -28,24 +29,55 @@ const NavLinks = [
   },
 ];
 
-export default class Navbar extends Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       navlinks: NavLinks,
+      isCurrencyOpen: null,
+      isCartOpen: false,
     };
   }
 
   static contextType = ApiContext;
 
+  componentDidMount() {
+    const { isCurrencyOpen } = this.context;
+    this.setState({ isCurrencyOpen: isCurrencyOpen });
+  }
+
   toggleIsCartOpen = () => {
     const { setIsCartOpen } = this.context;
-    setIsCartOpen();
+    setIsCartOpen(!this.state.isCartOpen);
+    this.setState({ isCartOpen: !this.state.isCartOpen });
   };
 
   toggleCurrency = () => {
     const { setCurrency } = this.context;
-    setCurrency();
+    setCurrency(!this.state.isCurrencyOpen);
+    this.setState({ isCurrencyOpen: !this.state.isCurrencyOpen });
+  };
+
+  handleClickOutside = () => {
+    const { setCurrency } = this.context;
+    setCurrency(false);
+    this.setState({ isCurrencyOpen: false });
+  };
+
+  handleClickOutsideCart = () => {
+    const { setIsCartOpen } = this.context;
+    setIsCartOpen(false);
+    this.setState({ isCartOpen: false });
+  };
+
+  handleOutsides = () => {
+    this.handleClickOutside();
+    this.handleClickOutsideCart();
+  };
+  fetchAndSet = (title) => {
+    const { fetchDataByCategory, setActiveCategory } = this.context;
+    fetchDataByCategory(title);
+    setActiveCategory(title);
   };
 
   render() {
@@ -54,16 +86,9 @@ export default class Navbar extends Component {
       cartQuantity,
       currencies,
       currentCurrency,
-      fetchDataByCategory,
       isCartOpen,
       isCurrencyOpen,
-      setActiveCategory,
     } = this.context;
-
-    const fetchAndSet = (title) => {
-      fetchDataByCategory(title);
-      setActiveCategory(title);
-    };
 
     return (
       <div className={styles.navbar}>
@@ -76,7 +101,7 @@ export default class Navbar extends Component {
                 }
                 key={navLink.id}
                 onClick={() => {
-                  fetchAndSet(navLink.title);
+                  this.fetchAndSet(navLink.title);
                 }}
                 to={navLink.url}
               >
@@ -91,7 +116,10 @@ export default class Navbar extends Component {
           </div>
         </div>
         <div className={styles.cart}>
-          <div className={styles.currency} onClick={this.toggleCurrency}>
+          <div
+            className={styles.currency}
+            onClick={() => this.toggleCurrency()}
+          >
             <div className={styles.symbol}>
               {currentCurrency ? currentCurrency : null}
             </div>
@@ -101,7 +129,12 @@ export default class Navbar extends Component {
                 {currencies
                   ? currencies.map((currency) => {
                       return (
-                        <Currency key={currency.label} currency={currency} />
+                        <div
+                          onClick={(e) => e.stopPropagation()}
+                          key={currency.label}
+                        >
+                          <Currency currency={currency} />
+                        </div>
                       );
                     })
                   : null}
@@ -115,9 +148,18 @@ export default class Navbar extends Component {
             </div>
             <div className={styles.cartIndex}>{cartQuantity}</div>
           </div>
-          {isCartOpen && <CartDropdown></CartDropdown>}
+
+          {isCartOpen && <CartDropdown />}
         </div>
       </div>
     );
   }
 }
+
+var clickOutsideConfig = {
+  handleClickOutside: function (instance) {
+    return instance.handleOutsides;
+  },
+};
+
+export default onClickOutside(Navbar, clickOutsideConfig);

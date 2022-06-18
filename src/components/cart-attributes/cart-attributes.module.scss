@@ -17,6 +17,12 @@
             font-size: 14px;
             line-height: 160%;
             text-align: center;
+            cursor: pointer;
+        }
+
+        .active {
+            background: #1D1F22;
+            color: #fff;
         }
     }
 
@@ -29,12 +35,17 @@
         flex-direction: row;
         align-items: center;
         gap: 6px;
+        cursor: pointer;
 
-        >span {
+        .color {
             width: 16px;
             height: 16px;
 
         }
+    }
+
+    .active {
+        border: 1px solid #5ECE7B;
     }
 
 }

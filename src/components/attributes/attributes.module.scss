@@ -27,7 +27,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
+
         }
+
+        .active {
+            background: #1D1F22;
+            color: #fff;
+        }
+
+
     }
 }
 
@@ -42,7 +51,11 @@
         .color {
             width: 36px;
             height: 36px;
+            cursor: pointer;
+        }
 
+        .active {
+            border: 1px solid #5ECE7B;
         }
     }
 }

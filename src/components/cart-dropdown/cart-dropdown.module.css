@@ -3,7 +3,7 @@
   top: 81px;
   right: 56px;
   width: 325px;
-  height: 677px;
+  height: 577px;
   padding: 32px 16px;
   background-color: white;
   display: -webkit-box;
@@ -74,7 +74,17 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 120%;
-  /* identical to box height, or 17px */
+  text-transform: uppercase;
+  text-decoration: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   text-transform: uppercase;
   color: #1D1F22;
 }

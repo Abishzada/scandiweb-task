@@ -47,12 +47,16 @@
             }
         }
 
-        .image {
-            width: 200px;
-            height: 288px;
-            background-size: cover;
-            background-position: center;
+        .imageContainer {
+
             position: relative;
+
+            .image {
+                width: 200px;
+                height: 288px;
+                background-size: cover;
+                background-position: center;
+            }
 
             .arrows {
                 position: absolute;

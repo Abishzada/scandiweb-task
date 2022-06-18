@@ -7,7 +7,7 @@
    display: flex;
    flex-wrap: wrap;
    gap: 7rem 7rem;
-   justify-content: center;
+   justify-content: left;
 }
 
 .title {
@@ -15,8 +15,6 @@
    font-weight: 400;
    line-height: 67px;
    padding: 4rem 0;
-   // text-align: left;
-   text-transform: uppercase;
 
 }
 
@@ -31,6 +29,6 @@
       top: 0;
       height: 100%;
       width: 100%;
-      background-color: rgb(68, 68, 68, 0.4);   
+      background-color: rgb(68, 68, 68, 0.4);
    }
 }

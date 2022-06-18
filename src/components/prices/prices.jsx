@@ -8,7 +8,6 @@ export default class Price extends Component {
   render() {
     const { price } = this.props;
     const { currentCurrency } = this.context;
-
     return (
       <div className={styles.price}>
         {price.currency.symbol === currentCurrency

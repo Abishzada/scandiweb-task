@@ -1,0 +1,13 @@
+.imageContainer {
+  display: -ms-grid;
+  display: grid;
+  grid-auto-rows: auto;
+  width: 176px;
+  height: 87px;
+}
+
+.imageContainer .sideImages {
+  width: 79px;
+  height: 80px;
+  background-size: cover;
+}

@@ -44,6 +44,12 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  cursor: pointer;
+}
+
+.capacityContainer .capacity .active {
+  background: #1D1F22;
+  color: #fff;
 }
 
 .colorContainer .colors {
@@ -63,4 +69,9 @@
 .colorContainer .colors .color {
   width: 36px;
   height: 36px;
+  cursor: pointer;
+}
+
+.colorContainer .colors .active {
+  border: 1px solid #5ECE7B;
 }
